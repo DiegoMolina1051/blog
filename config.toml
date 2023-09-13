@@ -1,41 +1,48 @@
-title = "Notre-Dame de Paris"
-baseURL = "https://gohugo-theme-ananke.pages.dev"
-languageCode = "en-us"
-theme = ["github.com/theNewDynamic/gohugo-theme-ananke"]
-resourceDir = "../resources"
-
-DefaultContentLanguage = "en"
-SectionPagesMenu = "main"
-Paginate = 3 # this is set low for demonstrating with dummy content. Set to a higher number
+baseurl = "/"
+languageCode = "en-US"
+title = "A Hugo website"
+theme = "hugo-lithium"
 googleAnalytics = ""
-enableRobotsTXT = true
+disqusShortname = ""
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_cache$"]
 
-[languages]
-  [languages.en]
-    title = "Ananke"
-    weight = 1
-    contentDir = "content/en"
-    # languageDirection = 'rtl' for Right-To-Left languages
-  [languages.fr]
-    title = "Ananke Fr"
-    weight = 2
-    contentDir = "content/fr"
+[permalinks]
+    post = "/:year/:month/:day/:slug/"
 
-[sitemap]
-  changefreq = "monthly"
-  priority = 0.5
-  filename = "sitemap.xml"
+[[menu.main]]
+    name = "About"
+    url = "/about/"
+[[menu.main]]
+    name = "GitHub"
+    url = "https://github.com/rstudio/blogdown"
+[[menu.main]]
+    name = "Twitter"
+    url = "https://twitter.com/rstudio"
 
 [params]
-  text_color = ""
-  author = ""
-  favicon = ""
-  site_logo = ""
-  description = "The last theme you'll ever need. Maybe."
-  # choose a background color from any on this page: https://tachyons.io/docs/themes/skins/ and preface it with "bg-"
-  background_color_class = "bg-black"
-  recent_posts_number = 3
+    description = "A website built through Hugo and blogdown."
 
-[[params.ananke_socials]]
-name = "twitter"
-url = "https://twitter.com/GoHugoIO"
+    # options for highlight.js (version, additional languages, and theme)
+    highlightjsVersion = "9.12.0"
+    highlightjsCDN = "//cdnjs.cloudflare.com/ajax/libs"
+    highlightjsLang = ["r", "yaml"]
+    highlightjsTheme = "github"
+
+    MathJaxCDN = "//cdnjs.cloudflare.com/ajax/libs"
+    MathJaxVersion = "2.7.5"
+
+    # path to the favicon, under "static"
+    favicon = "favicon.ico"
+
+    [params.logo]
+    url = "logo.png"
+    width = 50
+    height = 50
+    alt = "Logo"
+
+[markup]
+  defaultMarkdownHandler = "goldmark"
+  [markup.goldmark.renderer]
+    unsafe = true  # Enable user to embed HTML snippets in Markdown content.
+  [markup.highlight]
+    codeFences = false

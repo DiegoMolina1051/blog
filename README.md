@@ -1,370 +1,541 @@
-# Ananke, A theme for [Hugo](https://gohugo.io/), a framework for building websites.
+# The ReFresh theme for Hugo
 
-The intent of this theme is to provide a solid starting place for Hugo sites with basic features and include best practices for performance, accessibility, and rapid development.
+**ReFresh** is a theme for the [Hugo](https://gohugo.io) static site generator _highly_ modified from the awesome [Fresh](https://github.com/StefMa/hugo-fresh) theme (below you can find the list of changes to the original theme). 
 
-![screenshot](https://raw.githubusercontent.com/budparr/gohugo-theme-ananke/master/images/screenshot.png)
+You can find a live demo of the original Fresh theme [here](https://themes.gohugo.io/theme/hugo-fresh/) or a demo of the Hugo ReFresh theme [here](https://themes.gohugo.io/theme/hugo-refresh/).
 
-[DEMO](https://gohugo-ananke-theme-demo.netlify.com/)
+You can find another example of ReFresh theme in [my personal website](https://rjordaney.is/). 
 
-Features
+![ReFresh theme logo](images/screenshot.png)
 
-- Responsive
-- Accessible
-- Contact form
-- Custom Robots.txt (changes values based on environment)
-- Internal templates for meta data, google analytics, and DISQUS or COMMENTO comments
-- RSS Discovery
-- Table of Contents (must declare `toc: true` in post parameter)
-- Stackbit configuration ([Stackbit](https://www.stackbit.com))
-
-Also includes examples of Hugo Features or Functions:
-
-- Pagination (internal template)
-- Taxonomies
-- Archetypes
-- Custom shortcode
-- Related content
-- Hugo built-in menu
-- i18n
-- `with`
-- `HUGO_ENV`
-- `first`
-- `after`
-- `sort`
-- Site LanguageCode
-- `where`
-- Content Views
-- Partials
-- Template layouts (type "post" uses a special list template, single template, and a content view)
-- Tags
-- `len`
-- Conditionals
-- `ge` (greater than or equal to)
-- `.Site.Params.mainSections` to avoid hard-coding "blog," etc. [[release note](https://github.com/gohugoio/hugo/blob/66ec6305f6cb450ddf9c489854146bac02f7dca1/docs/content/meta/release-notes.md#enhancements)]
-
-
-This theme uses the "Tachyons" CSS library. This will allow you to manipulate the design of the theme by changing class names in HTML without touching the original CSS files. For more information see the [Tachyons website](https://tachyons.io/).
-
-
-
-## Installation
-
-### As a Hugo Module (recommended)
-
-> ⚠️ If you installed a [Hugo binary](https://gohugo.io/getting-started/installing/#binary-cross-platform), you may not have Go installed on your machine. To check if Go is installed:
-> ```
-> $ go version
-> ```
->  Go modules were considered production ready in v1.14. [Download Go](https://golang.org/dl/). 
-
-1. From your project's root directory, initiate the hugo module system if you haven't already:
-
-   ```
-   $ hugo mod init github.com/<your_user>/<your_project>
-   ```
-
-2. Add the theme's repo to your `config.toml`:
-
-   ```toml
-   theme = ["github.com/theNewDynamic/gohugo-theme-ananke"]
-   ```
-
-### As Git Submodule
-
-Inside the folder of your Hugo site run:
-
-```
-$ git submodule add https://github.com/theNewDynamic/gohugo-theme-ananke.git themes/ananke
-```
-For more information read the official [setup guide](//gohugo.io/overview/installing/) of Hugo.
-
-
+> This theme is intended for personal website and blog. If you'd like to extend the theme to include other functionalities submit a pull request.
 
 ## Getting started
 
-After installing the theme successfully it requires a just a few more steps to get your site running.
+To create a new site using Hugo ReFresh:
 
+```bash
+# Create site and cd into it
+hugo new site my-site && cd my-site
 
-### The config file
+# Clone the ReFresh theme into the themes folder
+git init
+git submodule add https://github.com/PippoRJ/hugo-refresh.git themes/hugo-refresh
 
-Take a look inside the [`exampleSite`](https://github.com/theNewDynamic/gohugo-theme-ananke/tree/master/exampleSite) folder of this theme. You'll find a file called [`config.toml`](https://github.com/theNewDynamic/gohugo-theme-ananke/blob/master/exampleSite/config.toml). To use it, copy the [`config.toml`](https://github.com/theNewDynamic/gohugo-theme-ananke/blob/master/exampleSite/config.toml) in the root folder of your Hugo site. Feel free to change the strings in this theme.
+# Remove the default config
+rm config.toml
 
-You may need to delete the line: `themesDir = "../.."`
+# Fetch the example config
+curl -O https://raw.githubusercontent.com/PippoRJ/hugo-refresh/master/exampleSite/config.yaml
 
+# Run the site locally
+hugo server -D
 
-### Add comments
-
-To enable comments, add following to your config file:
-
-- DISQUS: `disqusShortname = YOURSHORTNAME`
-- COMMENTO:
-  ```
-  [params]
-    commentoEnable = true
-  ```
-
-### Change the hero background
-
-For any page or post you can add a featured image by including the local path in front matter (see content in the `exampleSite/content/_readme.md` file for examples): `featured_image: '/images/gohugo-default-sample-hero-image.jpg'`
-
-#### Featured image as Page Resources
-If user is using [Page Resources](https://gohugo.io/content-management/page-resources/), the theme will try and match the `featured_image` from with a page resource of type `image` and use its relative permalink. If no `featured_image` is set, the theme will look for a Page Resource of type `image` whose filepath incudes either `cover` or `feature` 
-
-#### Other hero settings
-If you would like to hide the header text on the featured image on a page, set `omit_header_text` to `true`. See `exampleSite/content/contact.md` for an example.
-
-You don't need an image though. The default background color is black, but you can change the color, by changing the default color class in the config.toml file. Choose a background color from any on the [Tachyons](https://tachyons.io/docs/themes/skins/) library site, and preface it with "bg-"
-
-example: `background_color_class = "bg-blue"` or `background_color_class = "bg-gray"`
-
-
-
-### Activate the contact form
-
-This theme includes a shortcode for a contact form that you can add to any page (there is an example on the contact page in the exampleSite folder). One option is to use [formspree.io](//formspree.io/) as proxy to send the actual email. Each month, visitors can send you up to one thousand emails without incurring extra charges. Visit the Formspree site to get the "action" link and add it to your shortcode like this:
-
-```
-{{< form-contact action="https://formspree.io/your@email.com" >}}
+# Open the site in your browser
+open http://localhost:1313
 ```
 
-### Read more link
+To run the Example Site using Hugo ReFresh:
 
-The homepage and other areas of the site use a `read more` link on the element. You can customize the copy of this link to make it more descriptive with the parameter `read_more_copy` available as a site and front matter parameter.
+```bash
+# Create site and cd into it
+hugo new site my-site && cd my-site
 
-```
-# config.yaml
-# Globally for all pages:
-params:
-  read_more_copy: Read more about this entry
-# Just for french
-languages:
-  fr:
-    name: Français
-    weight: 2
-    params:
-       read_more_copy: En savoir plus à ce sujet
-```
-Using front matter and cascade, this can be customized for a whole section, or just for one page.
+# Clone the ReFresh theme into the themes folder
+git init
+git submodule add https://github.com/PippoRJ/hugo-refresh themes/hugo-refresh
 
-```
-# content/posts/tower-bridge-london.md
-  title: The Tower Bridge of London
-  read_more_copy: Read more about this bridge
+# Remove the default config
+rm config.toml
+
+# Copy the Example site content and configuration in my-site
+cp -R themes/hugo-refresh/exampleSite/* ./
+
+# Open the site in your browser
+hugo server -D
 ```
 
-### Social Follow + Share
+## Troubleshooting
 
-The theme automatically adds "Follow" link icons to the header and footer and "Share" link icons to pages unless `disable_share` parameter is set to true either on the site level (site params) or page level (front matter). Each built-in services sports a label, an icon and a color.
+If you see `error: failed to transform resource: TOCSS: failed to transform "style.sass"` when attempting to run your `hugo server`, make sure you have the extended version of Hugo installed:
 
-In order to register a service to be used, user must add an `ananke_socials` parameter to its project configuration file and list them through it in the desired order. Each entry must bear a 
-- name*: It matches the built-in service reference (Ex: twitter, github)
-- url*: The url of the handle's profile on the service (Ex: https://twitter.com/theNewDynamic, https://github.com/
-theNewDynamic)
-- rel: (default: `noopener`) Controls the `rel` attribute of the "follow" link. Useful for Mastodon verification which requires a `rel="me"` on the link.
-```yaml
-params:
-  ananke_socials:
-  - name: twitter
-    url: https://twitter.com/theNewDynamic
-  - name: github
-    url: https://github.com/theNewDynamic
-  - name: mastodon
-    url: https://social.example.com/@username
-    rel: me noopener
+```bash
+# On Ubuntu:
+snap refresh hugo --channel=extended
 ```
 
-If user needs to overwrite default `color` and `label` of the service, they simply need to append the following to the entry:
-- label: The displayed name of the service to be used to popuplate `[title]` attributes and read-only. (Ex: Twitter, GitHub)
-- color: Used for styling purposes. (Ex: '#1da1f2', '#6cc644')
+## Statistics counter
 
-```yaml
-params:
-  ananke_socials:
-  - name: twitter
-    url: https://twitter.com/theNewDynamic
-    label: TND Twitter
-  - name: github
-    url: https://github.com/theNewDynamic
-    label: TND GitHub Account
-    color: '#ff6800'
-```
+You can enter your Google / Yandex / etc statistic counter code into the `layouts/partials/counter.html`. Code will be generated right after open `<body>` tag.
 
-#### Limit Follow or Share
+## Custom HEAD
 
-If a user needs to control Share and Follow of a service, for example enabling "Share on Facebook" without having a Facebook Page to "follow", they can set `follow: false` one the registered service.
+If you want to include custom scripts at the end of the `HEAD` section, create a file in `layouts/partials/custom_head.html` and add your content there.
 
-```yaml
-params:
-  ananke_socials:
-  - name: facebook
-    label: Facebook
-    follow: false
-  - name: twitter
-    url: https://twitter.com/theNewDynamic
-    label: TND Twitter
-```
+## Customizing your page
 
-#### Social Icons Customization
+There are different configuration options for Hugo ReFresh including options for: the navbar, the sidebar, the homepage, fonts, colours landing, stats counters and images. 
+Read the comments in the `config.yaml` file to know more.
 
-On top of easily customizing the built-in services' label and color, user can overwrite their icon by adding an svg file at `/assets/ananke/socials` with a filename matching the service's name.
-For example, in order to use your own GitHub icon, simply add an svg file at `/assets/ananke/socials/github.svg`
+The images specified in the `config.yaml` file need to be placed in the directory specified by the `assetDir` option in the config file. 
+E.g.: set `assetDir: "static"` to the set the default folder the `static` folder of your site. 
 
-#### Built-in Services
-Here is the list of built-in services. Those marked with an `*` are also part of the "Share" module.
+## List of shortcodes you can use in your articles with description:
 
-- twitter*
-- instagram
-- youtube
-- github
-- gitlab
-- keybase
-- linkedin*
-- medium
-- mastodon
-- slack
-- stackoverflow
-- facebook*
-- rss
+A live example of these shortcodes can be found [here](https://rjordaney.is/miscellaneous/example/).
 
-#### Complement
+<details>
+<summary> title1.html, title2.html, title3.html, title4.html, title5.html, title6.html </summary>
 
-In order to add an unkown service (absent from the list above), you simply need to add all three settings to `ananke_socials`: name, url, label, color, and optionally add an icon file matching the `name` to the `assets/ananke/socials` directory. In the absence of an icon, the theme will print the service's label.
-
-### Content indexing
-
-If the theme is ran in [production](#production), pages will be indexed by search engines. To prevent indexing on some given pages, add `private: true` to its Front Matter.
-
-### Update font or body classes
-
-The theme is set, by default, to use a near-white background color and the "Avenir" or serif typeface. You can change these in your config file with the `body_classes` parameter, like this:
+Usage example:
 
 ```
-[params]
-  body_classes = "avenir bg-near-white"
+{{< title1 "My awesome title" "my-title-id">}}
 ```
 
-which will give you a body class like this:
+The **first parameter** is the title of the shortcode (in this example is "My awesome title").<br>
+The **second paramter** is the ID of the shortcode (in this example is "my-title-id").<br>
+It can be used in links to the same page as:
 
 ```
-<body class="avenir bg-near-white">
+[link to the title](#my-title-id)
 ```
 
-note: The `body_classes` parameter will not change the font used in post content. To do this, you must use the `post_content_classes` parameter.
+</details>
 
-You can find a list of available typefaces [here](https://github.com/tachyons-css/tachyons/blob/v4.7.0/src/_font-family.css).
+<details>
+<summary> subtitle1.html, subtitle2.html, subtitle3.html, subtitle4.html, subtitle5.html, subtitle6.html </summary>
 
-And a list of background colors [here](https://github.com/tachyons-css/tachyons/blob/v4.7.0/src/_skins.css#L96).
-
-
-_n.b. in future versions we will likely separate the typeface and other body classes._
-
-
-### CSS
-
-Ananke stylesheet is built with Hugo Pipes's [Asset Bundling](https://gohugo.io/hugo-pipes/bundling/#readout) alone to maximize compatibiliy. The theme simply bundles its several files into one minified and fingerprinted (in production) CSS file.
-
-Ananke uses [Tachyon.io](https://tachyons.io/) utility class library.
-
-#### Custom CSS
-
-WARNING: Pending resolution of this [discussion](https://github.com/theNewDynamic/gohugo-theme-ananke/discussions/452#discussioncomment-1865301), Custom CSS only works with Hugo Extended
-
-In order to complement the default CSS with your own, you can add custom css files to the project. 
-
-1. Just add a `assets/ananke/css` directory to your project and add the file(s) in it.
-2. Register the files using the `custom_css` key in your site's parameter. The path referenced in the parameter should be relative to the `assets/ananke/css` folder. 
-
-The css files will be added in their registered order to final `main.css` file.
-
-For example, if your css files are `assets/ananke/css/custom.css` and `assets/ananke/special.css` then add the following to the config file:
+Usage example:
 
 ```
-  [params]
-    custom_css = ["custom.css","special.css"]
-```
-__IMPORTANT__: Files registered through the `custom_css` array, while unlimited in number, must be of the same type (Ex: all `scss` or all `css`)
-
-__Note on retrocompatibiliy for custom css__: If the files registered through the `custom_css` setting are not found in `assets/ananke/css` the theme will expect them to live at the given path relative to the static directory and load them as <link> requests.
-
-### Show Reading Time and Word Count
-
-If you add a key of `show_reading_time` true to either the Config Params, a page or section's front matter, articles will show the reading time and word count.
-
-
-### Adding Scripts to the Page Head
-
-Some scripts need to be added within the page head. To add your own scripts to the page head, simply insert them into the `head-additions.html` partial located in the `layouts/partials` folder.
-
-
-### Logo
-
-You can replace the title of your site in the top left corner of each page with your own logo. To do that put your own logo into the `static` directory of your website, and add the `site_logo` parameter to the site params in your config file. For example:
-
-```
-[params]
-  site_logo = "img/logo.svg"
+{{< subtitle1 "My awesome subtitle" "my-subtitle-id">}}
 ```
 
-### Set Content Font Color
-
-You can set the font color of the main content both globally and on individual pages:
-
-Globally:
-Set the `text_color` param in the `config.toml` file.
-```
-[params]
-  text_color = "green"
-```
-
-Individual Page (prioritized over global):
-Set the `text_color` param in a page's markdown file front matter.
-
-note: The value of `text_color` must be a valid tachyons color class. A list can be found [here](https://tachyons.io/docs/themes/skins/).
-
-
-### Localize date format
-
-Dates of blog posts and single pages are rendered with the default date format commonly used in the USA and Canada. It is possible to specify a different format.
+The **first parameter** is the title of the shortcode (in this example is "My awesome subtitle").<br>
+The **second paramter** is the ID of the shortcode (in this example is "my-subtitle-id").<br>
+It can be used in links to the same page as:
 
 ```
-[params]
-  date_format = "2. January 2006"
+[link to the subtitle](#my-subtitle-id)
 ```
 
-With hugo 0.87.0 and above, you can also use predefined layout, like `:date_full`, and it will output localized dates or times. 
-See hugo's documentation of the [`time.Format` function](https://gohugo.io/functions/dateformat/) for more details.
+</details>
 
+<details>
+<summary> code.html </summary>
 
-### Nearly finished
+This shortcode builds a centred page that is two-third of the full size of the page.
 
-In order to see your site in action, run Hugo's built-in local server.
-
-`$ hugo server`
-
-Now enter [`localhost:1313`](http://localhost:1313/) in the address bar of your browser.
-
-## Production
-
-To run in production (e.g. to have Google Analytics show up), run `HUGO_ENV=production` before your build command. For example:
+Usage example:
 
 ```
-HUGO_ENV=production hugo
+{{< code language="shell" >}}
+    $ sudo bash -c 'echo 0 > /proc/sys/kernel/randomize_va_space'
+{{< /code >}}
 ```
 
-Note: The above command will not work on Windows. If you are running a Windows OS, use the below command:
+This shortcode has 2 parameters:
+
+* **line-numbers** to hide or show the line numbers. The default is true, for single line code the number is never shown.
+
+* **language** is used to highlight the syntax of the code properly
+
+</details>
+
+<details>
+<summary> codeWide.html </summary>
+
+This shortcode builds a centred page that is as wide as the full size of the page.
+
+Usage example:
 
 ```
-set HUGO_ENV=production
-hugo
+{{< codeWide language="shell" >}}
+    $ dmesg | tail
+    ......
+    [13401.299114] overflow64[16566]: segfault at 616161616161 ip 0000616161616161 sp 00007fffffffddb0 error 14 in libc-2.27.so[7ffff79e4000+1e7000]
+{{< /codeWide >}}
 ```
 
-## Contributing
+This shortcode has 2 parameters:
 
-If you find a bug or have an idea for a feature, feel free to use the [issue tracker](https://github.com/theNewDynamic/gohugo-theme-ananke/issues) to let me know.
+* **line-numbers** to hide or show the line numbers. The default is true, for single line code the number is never shown.
+
+* **language** is used to highlight the syntax of the code properly
+
+</details>
+
+<details>
+<summary> container.html </summary>
+
+This shortcode builds a centred page that is as wide as the two third of the size of the page. The content of the shortcode will pass through the markdown processor.
+
+Usage example:
+
+```
+{{< container "container-id" >}}
+
+{{< /container >}}
+```
+
+This shortcode has an optional parameter to give an ID to the html `div`.
+
+</details>
+
+<details>
+<summary> containerWide.html </summary>
+
+This shortcode builds a centred page that is as wide as the size of the page. The content of the shortcode will pass through the markdown processor. 
+
+Usage example:
+
+```
+{{< containerWide "container-wide-id" >}}
+
+{{< /containerWide >}}
+```
+
+This shortcode has an optional parameter to give an ID to the html `div`.
+
+</details>
+
+<details>
+<summary> figure.html </summary>
+
+This shortcode resize an image that with the width and/or height that you specify
+
+Usage example:
+
+```
+{{< figure src="images/the_stack.png" width="700" >}}
+{{< figure src="images/the_stack.png" height="700" >}}
+```
+
+The parameter **src** is the location of the image relative to the location of the file where the shortcode has been used.<br>
+The parameter **width** is the width of the image.<br>
+The parameter **height** is the height of the image.<br>
+The parameter **caption** is the caption of the image.<br>
+The parameter **alt** is the alt property of the image.<br>
+
+</details>
+
+<details>
+<summary> twoFigure.html </summary>
+
+This shortcode shows 2 images one next to the other with the possibility to resize them.
+
+Usage example:
+
+```
+{{< twoFigure src1="images/overflow_1.png" width1="700" src2="images/overflow_2.png" width2="700" >}}
+```
+
+The parameter **src1** is the location of the right image relative to the location of the file where the shortcode has been used.<br>
+The parameter **width1** is the width of the right image.<br>
+The parameter **height1** is the height of the right image.<br>
+The parameter **caption1** is the caption of the right image.<br>
+The parameter **alt1** is the alt property of the right image.<br>
+The parameter **src2** is the location of the left image relative to the location of the file where the shortcode has been used.<br>
+The parameter **width2** is the width of the left image.<br>
+The parameter **height2** is the height of the left image.<br>
+The parameter **caption2** is the caption of the left image.<br>
+The parameter **alt2** is the alt property of the left image.<br>
+
+
+With a small screen these images will be shown one on top of the other.
+
+See example of use [here](https://rjordaney.is/lectures/basic_buffer_overflow/)
+
+</details>
+
+<details>
+<summary> twoVideos.html </summary>
+
+This shortcode shows 2 YouTube videos one next to the other.
+
+Usage example:
+
+```
+{{% twoVideos id2="pKRzfdIJUZE" id1="Ncv2KmhVgyU" autoplay1=true ratio1="4:3" ratio2="16:9" %}}
+```
+
+The parameter **id1** is the ID of the left video<br>
+The parameter **id2** is the ID of the right video<br>
+The parameter **autoplay1** is used to start the video on the left (the video will start on mute). Set it to "true" to activate autoplay.<br>
+The parameter **autoplay2** is used to start the video on the left (the video will start on mute). Set it to "true" to activate autoplay.<br>
+The parameter **ratio1** is used to specify the the ratio of the video on the left. It can be either "16:9" or "4:3". The default is "16:9".<br>
+The parameter **ratio2** is used to specify the the ratio of the video on the right. It can be either "16:9" or "4:3". The default is "16:9".<br>
+
+With a small screen these videos will be shown one on top of the other.
+
+</details>
+
+<details>
+<summary> book.html </summary>
+
+Usage example:
+
+```
+{{< book title="Title Awesome" authors="Awesome author" image="images/cover.jpg" size="300x">}}
+```
+
+The parameter **title** is the title of the book.<br>
+The parameter **authors** contains the authors of the book.<br>
+The parameter **image** is the cover of the book.<br>
+
+The parameter **size** is used to specify the size of the book in pixel "width" x "height".<br>
+E.g.: "300x" means 300px of width.<br> 
+E.g.: "x300" means 300px of height. <br>
+
+See example of use [here](https://rjordaney.is/miscellaneous/ml_books/)
+
+</details>
+
+<details>
+<summary> exercise.html </summary>
+
+Usage example:
+
+```
+{{< exercise >}}
+Text of the exercise.
+{{< /exercise >}}
+```
+
+This shortcode has no parameters.
+
+See example of use [here](https://rjordaney.is/code_exercises/staircase_n_steps/)
+
+</details>
+
+
+<details>
+<summary> tabsCode.html </summary>
+
+Usage example:
+
+```
+{{< tabsCode 
+    file1="/content/code_exercises/staircase_n_steps/code/solution_python.md" language1="python" title1="Python" icon1="python"
+    file2="/content/code_exercises/staircase_n_steps/code/solution_c.md" language1="c" title2="C" icon2="c"
+    file3="/content/code_exercises/staircase_n_steps/code/solution_java.md" language1="java" title3="Java" icon3="java" 
+>}}
+```
+
+The parameter **file1** is the name of the code file to be displayed in the first tab.
+The path needs to start from the `content` folder.<br>
+The parameter **language1** is used to highlight the syntax of the code properly. 
+The parameter **title1** is the title of the first tab.<br>
+The parameter **icon1** is the icon to be shown at the right of the title, it is an optional parameter. See the partial code `icon.html` for the available icons.
+
+There are 6 tabs supported at this moment
+
+* the files parameters are **file1**, **file2**, **file3**, **file4**, **file5**, **file6** 
+
+* the titles parameters are **title1**, **title2**, **title3**, **title4**, **title5**, **title6** 
+
+* the languages parameters are **language1**, **language2**, **language3**, **language4**, **language5**, **language6**
+
+* the icons parameters are **icon1**, **icon2**, **icon3**, **icon4**, **icon5**, **icon6** 
+
+See example of use [here](https://rjordaney.is/code_exercises/staircase_n_steps/)
+
+</details>
+
+<details>
+<summary> tabs.html </summary>
+
+Usage example:
+
+```
+{{< tabs 
+    file1="/content/exercises/article1/comments/my_comments.md" title1="My Ideas"
+    file2="/content/exercises/article1/comments/your_comments.md" title2="Your Ideas" 
+    file3="/content/exercises/article1/comments/her_comments.md" title3="Her Ideas"  
+>}}
+```
+
+The content of the files (file1, file2 ...) are passed through the markdown processor, so you can use markdown in these files.
+
+The parameter **file1** is the name of the code file to be displayed in the first tab.
+The path needs to start from the `content` folder.<br>
+The parameter **title1** is the title of the first tab.<br>
+The parameter **icon1** is the icon to be shown at the right of the title, it is an optional parameter. See the partial code `icon.html` for the available icons.
+
+There are 6 tabs supported at this moment
+
+* the files parameters are **file1**, **file2**, **file3**, **file4**, **file5**, **file6** 
+
+* the titles parameters are **title1**, **title2**, **title3**, **title4**, **title5**, **title6** 
+
+* the icons parameters are **icon1**, **icon2**, **icon3**, **icon4**, **icon5**, **icon6** 
+
+</details>
+
+<details>
+<summary> codeInLine.html </summary>
+
+Usage example:
+
+```
+{{< codeInline >}}sudo echo 0 > /proc/sys/kernel/randomize_va_space{{< /codeInline >}}
+```
+
+This shortcode has 2 parameters:
+
+* **language** is used to highlight the syntax of the code properly
+
+* **id** to set a id of the html `code` element
+
+See an example of usage [here](https://rjordaney.is/lectures/basic_buffer_overflow/)
+
+</details>
+
+<details>
+<summary> messageBlue.html, messageDark.html, messageGreen.html, messageRed.html, messageYellow.html </summary>
 
 
 
+</details>
 
-TODO:
+<details>
+<summary> notificationBlue.html, notificationGreen.html, notificationRed.html, notificationYellow.html </summary>
 
-- fix hard-coded link to [section](https://github.com/theNewDynamic/gohugo-theme-ananke/blob/master/layouts/index.html#L32)
+
+
+</details>
+
+<details>
+<summary> siteBlue.html, siteGreen.html, siteLightgreen.html, siteRed.html, siteYellow.html </summary>
+
+Usage example:
+
+```
+{{< siteLightgreen "Web" "https://www.example.com" >}}
+<p>Description of the website.</p>
+{{< /siteLightgreen >}}
+```
+
+The **first parameter** will appear in the right coloured part of the shortcode.<br>
+The **second parameter** will appear in the middle part of the shortcode.<br>
+
+See example of usage [here](https://rjordaney.is/miscellaneous/ctf_resources/)
+
+</details>
+
+
+
+## Customization options for a regular page
+
+These are the options that you can define is the front matter of a regular page:
+
+```
+---
+title: "My Awesome Title"
+date: 2019-06-03T21:51:13+01:00
+draft: false
+hideLastModified: true
+summaryImage: "images/system.jpg" 
+keepImageRatio: true
+tags: ["Tag1", "tag2", "tag 3"]
+summary: "This is a custom summary for my article"
+showInMenu: true
+---
+```
+
+* `summaryImage`: it is used to specify the image to be used in the summary 
+
+* `keepImageRatio`: it is used to force the aspect ratio of the image to be kept. The default value is **false**.
+
+* `summary`: it is used to specify the summary of an article instead of taking it from the article itself.
+
+* `hideLastModified`: it is used to hide the the timestamp added at the end of the article.
+
+* `showInMenu`: it is used to show the article in the top right menu. 
+
+* `tags`: it is the list of tags for the article; they will be used to build the left sidebar.
+
+
+To avoid path problems when specifying the `summaryImage`, it is recommended to define a regular page as a leaf bundle. The example above will result in:
+
+```
+* my_awesome_title (folder)
+   * index.md (file)
+   * images (folder)
+      * system.jpg (file)
+```
+
+## Multilanguage support
+
+To chose the default language you need to set the `DefaultContentLanguage` setting in the `config.yaml` file.
+(You can also have multiple languages at the same time, see `exampleSite/config.yaml` for an example.)
+
+The language supported are:
+
+* English 
+
+* Spanish
+
+* French
+
+* Italian
+
+* Russian
+
+* Chinese
+
+* Polish
+
+* German
+
+* Portuguese
+
+If you want to add a missing language please submit a feature request.
+
+
+## List of modifications from the original theme
+
+* The ReFresh theme was transformed from _single page_ template to _multipage_.
+
+* Added multilanguage support.
+
+* The left side menu now contains page tags along with theirs post counter.
+
+* The _list_ and _terms_ types of pages contain a list of the post summaries.
+
+* The images used to build the summaries can be resized to allow better usage of the bandwidth.
+
+* The js and css files can be minified (with a configurable option on the `config.yaml`).
+
+* The menu is automatically built following the structure of the `content` folder. Two levels are allowed at the moment.
+
+* The `navbar-burger` used in the original theme's menu is removed (it was displayed when the page was resized).
+
+* The `.sass` files are now processed with `resources.ExecuteAsTemplate` so that it is possible to use variables from the `config.yaml`.
+
+* Options in the `config.yaml` are added to configure the font-family for the navbar, sidebar and content of the a page.
+
+* [Bulma](https://bulma.io/) (the css framework the theme is based on) is now updated to version 0.7.5 because in the new version the class _content_ has a separate style to allow modification that will impact only the contents of the posts.
+
+* [highlight.js](https://highlightjs.org/) was added to better highlight the code sections of the posts. I chose the style **monokai-sublime**.
+
+* [highlightjs-line-number.js](https://github.com/wcoder/highlightjs-line-numbers.js/) was added to have the line number at the beginning of each line of code in a code sections of a post.
+
+* A minimal version of [MathJax](https://www.mathjax.org/) was added to allow LaTeX style mathematical expressions to be placed in the site.
+
+* Several other options are added to personalise the content of a post. 
+
+* A shortcode is added to resize the images and save bandwidth in a post content.
+
+* A shortcode is added to show multiple tabs.
+
+* Four shortcodes are added to show code: inline, in page, in page wide, in tabs. 
+
+* The loaders images are now processed with `resources.ExecuteAsTemplate` so that they take the main colour of the theme (defined in `config.yaml`)
+
+* The _favicon_ is processed with `resources.ExecuteAsTemplate` to follow the main colour of the page.
+
+* Added Open Graph meta tags to each post for easy-sharing on social media sites.
+
+* All the js and css files are loaded locally, i.e., not loaded from third party sites. 
